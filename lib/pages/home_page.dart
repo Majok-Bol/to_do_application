@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 class HomePageState extends State<HomePage>{
+  final _controller=TextEditingController();
   final List toDoList=[
     ["Make tutorial",false],
     ["Go to gym",false],
@@ -23,11 +24,21 @@ class HomePageState extends State<HomePage>{
   void createNewTask(){
     setState(() {
       showDialog(context: context, builder: (context){
-        return DialogBox();
+        return DialogBox(
+          myController:_controller,
+          onSave: saveNewTask,
+          onCancel:()=> Navigator.of(context).pop(),
+        );
       });
 
 
     });
+  }
+  void saveNewTask(){
+    setState(() {
+      toDoList.add([_controller.text,false]);
+    });
+    Navigator.of(context).pop();
   }
   @override
   Widget build(BuildContext context){
