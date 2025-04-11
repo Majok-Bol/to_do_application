@@ -6,7 +6,7 @@ class MyButton extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialButton(
-      color:Colors.purple.shade100,
+      color:Colors.yellow.shade100,
         onPressed: onPressed,
         child: Text(text));
   }
