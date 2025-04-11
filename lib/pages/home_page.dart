@@ -34,9 +34,17 @@ class HomePageState extends State<HomePage>{
 
     });
   }
+  //delete task
+  void deleteTask(int index){
+    setState(() {
+      toDoList.removeAt(index);
+
+    });
+  }
   void saveNewTask(){
     setState(() {
       toDoList.add([_controller.text,false]);
+      _controller.clear();
     });
     Navigator.of(context).pop();
   }
@@ -55,10 +63,9 @@ class HomePageState extends State<HomePage>{
       body:ListView.builder(
         itemCount:toDoList.length ,
           itemBuilder: (context,index){
-          return ToDoTile(taskName:toDoList[index][0], taskCompleted: toDoList[index][1], onChanged:(value) {
-            checkBoxChanged(value,index);
-
-          },);
+          return ToDoTile(taskName:toDoList[index][0], taskCompleted: toDoList[index][1], onChanged:(value)=>
+            checkBoxChanged(value,index),deleteFunction: (context)=>deleteTask(index),
+            );
 
       })
     );
